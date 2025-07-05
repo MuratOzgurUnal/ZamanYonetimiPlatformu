@@ -6,14 +6,13 @@
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* DEĞİŞİKLİK: 'overflow' düzeltildi ve dikey kaydırmaya izin verildi */
 body {
     font-family: 'Inter', sans-serif, system-ui; 
     background-color: var(--bg-dark);
     color: var(--text-primary); 
     min-height: 100vh; 
     padding: 40px 20px; 
-    overflow-x: hidden; /* Yatay kaydırmayı engelle, dikey kaydırmaya izin ver */
+    overflow-x: hidden;
 }
 .container { max-width: 1200px; margin: 0 auto; }
 
@@ -22,14 +21,13 @@ body {
 .title-group { display: flex; align-items: center; gap: 20px; }
 .main-header h1 { font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; }
 
-/* YENİ: Hızla Dönen Analog Saat Stilleri */
 .analog-clock {
     width: 40px;
     height: 40px;
     border: 3px solid var(--text-secondary);
     border-radius: 50%;
     position: relative;
-    flex-shrink: 0; /* Küçülmesini engelle */
+    flex-shrink: 0;
 }
 .hand {
     position: absolute;
@@ -49,7 +47,7 @@ body {
     width: 2px;
     height: 16px;
     margin-left: -1px;
-    animation: spin-minute 1s linear infinite; /* Çok hızlı dönsün */
+    animation: spin-minute 1s linear infinite;
 }
 .pivot {
     width: 6px;
@@ -62,7 +60,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* YENİ: Analog Saat Animasyonları */
 @keyframes spin-hour {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -72,27 +69,25 @@ body {
     to { transform: rotate(360deg); }
 }
 
-
-/* DEĞİŞİKLİK: Saat/Tarih daha küçük ve dikkat çekmeyen bir hale getirildi */
 #datetime-container {
     text-align: right;
 }
 #time {
     display: block;
     font-family: 'Roboto Mono', monospace;
-    font-size: 1.2rem; /* Küçültüldü */
+    font-size: 1.2rem;
     font-weight: 500;
-    color: var(--text-secondary); /* Daha sönük bir renk */
-    text-shadow: none; /* Parlama kaldırıldı */
+    color: var(--text-secondary);
+    text-shadow: none;
     letter-spacing: 1px;
 }
 #date {
     display: block;
-    font-size: 0.8rem; /* Küçültüldü */
+    font-size: 0.8rem;
     font-weight: 500;
     text-transform: capitalize;
     color: var(--text-secondary);
-    opacity: 0.7; /* Daha da sönük hale getirildi */
+    opacity: 0.7;
     margin-top: 4px;
 }
 
@@ -101,6 +96,7 @@ body {
 .main-header.animated { animation-delay: 0.1s; }
 .task-adder.animated { animation-delay: 0.3s; }
 .matrix-grid.animated { animation-delay: 0.5s; }
+.footer-credit.animated { animation-delay: 0.7s; }
 @keyframes slideUpFadeIn { to { opacity: 1; transform: translateY(0); } }
 
 /* --- İş Ekleme Alanı --- */
@@ -178,68 +174,59 @@ body {
 .matrix-grid.expanded-view ~ .task-adder { opacity: 0; pointer-events: none; transform: translateY(-50px); }
 
 
-/* YENİ: DUYARLI TASARIM (RESPONSIVE) AYARLARI */
-
-/* Tabletler ve Küçük Laptoplar (900px ve altı) */
+/* DUYARLI TASARIM (RESPONSIVE) AYARLARI */
 @media (max-width: 900px) {
-    /* Matris ızgarasını 2 sütundan tek sütuna düşür */
     .matrix-grid {
         grid-template-columns: 1fr;
-        min-height: auto; /* Yükseklik içeriğe göre ayarlanacak */
+        min-height: auto;
     }
-
-    /* Genişletilmiş görünümde, tek sütunlu düzende gereksiz olan grid ayarlarını sıfırla */
     .matrix-grid.expanded-view .quadrant.active {
         grid-row: auto;
         grid-column: auto;
-        min-height: 80vh; /* Yüksekliği biraz azaltarak daha esnek yapalım */
+        min-height: 80vh;
     }
-
-    /* Genişletilmiş görünümdeki liste yüksekliğini ayarla */
     .matrix-grid.expanded-view .quadrant.active .task-list {
         max-height: calc(80vh - 200px);
     }
 }
-
-/* Mobil Cihazlar (768px ve altı) */
 @media (max-width: 768px) {
-    /* Sayfa kenar boşluklarını azalt */
     body {
         padding: 20px 15px;
     }
-
-    /* Başlığı ve saat/tarih bölümünü alt alta getir */
     .main-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
         margin-bottom: 30px;
     }
-
     #datetime-container {
-        text-align: left; /* Sola hizala */
+        text-align: left;
         width: 100%;
     }
-
-    /* Görev ekleme formundaki kontrol elemanlarını alt alta getir */
     .controls-container {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
     }
-
     .add-task-btn {
-        width: 100%; /* Butonun tam genişlik kaplamasını sağla */
+        width: 100%;
         padding-top: 12px;
         padding-bottom: 12px;
     }
-
-    /* Quadrant'ların iç boşluklarını azalt */
     .quadrant {
         padding: 20px;
     }
-
     .quadrant-header h2 {
         font-size: 1.1rem;
     }
+}
+
+/* --- Sayfa Altı Bilgisi (Footer) --- */
+.footer-credit {
+    text-align: center;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
