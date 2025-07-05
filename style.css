@@ -5,10 +5,15 @@
     --c-do: #ef4444; --c-schedule: #f97316; --c-delegate: #3b82f6; --c-delete: #6b7280;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* DEĞİŞİKLİK: 'overflow' düzeltildi ve dikey kaydırmaya izin verildi */
 body {
     font-family: 'Inter', sans-serif, system-ui; 
     background-color: var(--bg-dark);
-    color: var(--text-primary); min-height: 100vh; padding: 40px 20px; overflow: hidden;
+    color: var(--text-primary); 
+    min-height: 100vh; 
+    padding: 40px 20px; 
+    overflow-x: hidden; /* Yatay kaydırmayı engelle, dikey kaydırmaya izin ver */
 }
 .container { max-width: 1200px; margin: 0 auto; }
 
@@ -171,3 +176,70 @@ body {
 .matrix-grid.expanded-view .quadrant.active .task-list { flex-grow: 0; overflow-y: auto; max-height: calc(85vh - 220px); width: 100%; margin-top: 25px; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-light); }
 .matrix-grid.expanded-view .quadrant.active .back-btn { opacity: 1; transform: translateY(0); max-height: 100px; margin-top: 20px; }
 .matrix-grid.expanded-view ~ .task-adder { opacity: 0; pointer-events: none; transform: translateY(-50px); }
+
+
+/* YENİ: DUYARLI TASARIM (RESPONSIVE) AYARLARI */
+
+/* Tabletler ve Küçük Laptoplar (900px ve altı) */
+@media (max-width: 900px) {
+    /* Matris ızgarasını 2 sütundan tek sütuna düşür */
+    .matrix-grid {
+        grid-template-columns: 1fr;
+        min-height: auto; /* Yükseklik içeriğe göre ayarlanacak */
+    }
+
+    /* Genişletilmiş görünümde, tek sütunlu düzende gereksiz olan grid ayarlarını sıfırla */
+    .matrix-grid.expanded-view .quadrant.active {
+        grid-row: auto;
+        grid-column: auto;
+        min-height: 80vh; /* Yüksekliği biraz azaltarak daha esnek yapalım */
+    }
+
+    /* Genişletilmiş görünümdeki liste yüksekliğini ayarla */
+    .matrix-grid.expanded-view .quadrant.active .task-list {
+        max-height: calc(80vh - 200px);
+    }
+}
+
+/* Mobil Cihazlar (768px ve altı) */
+@media (max-width: 768px) {
+    /* Sayfa kenar boşluklarını azalt */
+    body {
+        padding: 20px 15px;
+    }
+
+    /* Başlığı ve saat/tarih bölümünü alt alta getir */
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    #datetime-container {
+        text-align: left; /* Sola hizala */
+        width: 100%;
+    }
+
+    /* Görev ekleme formundaki kontrol elemanlarını alt alta getir */
+    .controls-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .add-task-btn {
+        width: 100%; /* Butonun tam genişlik kaplamasını sağla */
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    /* Quadrant'ların iç boşluklarını azalt */
+    .quadrant {
+        padding: 20px;
+    }
+
+    .quadrant-header h2 {
+        font-size: 1.1rem;
+    }
+}
