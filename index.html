@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaman Yönetimi Platformu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header animated">
+            <div class="title-group">
+                <!-- Animasyonlu Analog Saat -->
+                <div class="analog-clock">
+                    <div class="hand hour-hand"></div>
+                    <div class="hand minute-hand"></div>
+                    <div class="pivot"></div>
+                </div>
+                <h1>Zaman Yönetimi Platformu</h1>
+            </div>
+            <div id="datetime-container">
+                <span id="time"></span>
+                <span id="date"></span>
+            </div>
+        </header>
+
+        <form id="taskForm" class="task-adder animated">
+            <div class="input-container">
+                <input type="text" id="taskInput" placeholder="Yeni bir 'tamamlanacak iş' yazın..." autocomplete="off" required>
+            </div>
+            <div class="controls-container">
+                <div class="radio-toggles">
+                    <div class="toggle-group">
+                        <input type="radio" id="urgent" name="urgency" value="urgent" checked>
+                        <label for="urgent">Acil</label>
+                        <input type="radio" id="not-urgent" name="urgency" value="not-urgent">
+                        <label for="not-urgent">Acil Değil</label>
+                    </div>
+                    <div class="toggle-group">
+                        <input type="radio" id="important" name="importance" value="important" checked>
+                        <label for="important">Önemli</label>
+                        <input type="radio" id="not-important" name="importance" value="not-important">
+                        <label for="not-important">Önemsiz</label>
+                    </div>
+                </div>
+                <button type="submit" class="add-task-btn">İş Ekle</button>
+            </div>
+        </form>
+
+        <main class="matrix-grid animated" id="matrixGrid">
+            <div class="quadrant" id="q1">
+                <div class="quadrant-header">
+                    <div><h2>YAP</h2><p class="quadrant-subtitle">Acil & Önemli</p></div>
+                    <span class="task-count-badge">0</span>
+                </div>
+                <p class="task-count-text">0 iş</p>
+                <ul class="task-list"></ul>
+                <button class="back-btn">← Geri</button>
+            </div>
+            <div class="quadrant" id="q2">
+                <div class="quadrant-header">
+                    <div><h2>PLANLA</h2><p class="quadrant-subtitle">Acil Değil & Önemli</p></div>
+                    <span class="task-count-badge">0</span>
+                </div>
+                <p class="task-count-text">0 iş</p>
+                <ul class="task-list"></ul>
+                <button class="back-btn">← Geri</button>
+            </div>
+            <div class="quadrant" id="q3">
+                <div class="quadrant-header">
+                    <div><h2>DELEGE ET</h2><p class="quadrant-subtitle">Acil & Önemsiz</p></div>
+                    <span class="task-count-badge">0</span>
+                </div>
+                <p class="task-count-text">0 iş</p>
+                <ul class="task-list"></ul>
+                <button class="back-btn">← Geri</button>
+            </div>
+            <div class="quadrant" id="q4">
+                <div class="quadrant-header">
+                    <div><h2>SİL / ERTELE</h2><p class="quadrant-subtitle">Acil Değil & Önemsiz</p></div>
+                    <span class="task-count-badge">0</span>
+                </div>
+                <p class="task-count-text">0 iş</p>
+                <ul class="task-list"></ul>
+                <button class="back-btn">← Geri</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
